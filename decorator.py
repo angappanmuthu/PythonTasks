@@ -10,11 +10,11 @@ json_file = open('data.json')
 
 json_data = json.load(json_file)
 
-#print(json_data)
 
 # get names from the txt file using file handler
 
 names = [name.strip('\n') for name in open('name.txt','r')]
+not_exist_names = names.copy()
 
 
 def isNameExist(data,names):
@@ -22,16 +22,25 @@ def isNameExist(data,names):
         for ind,d in enumerate(data):
             if n == d['name']:
                 try:
-                    names.remove(d['name'])
-                except: 
-                    print(ind,d['name'])
-                    id = len(json_data) + 1
-                    json_data.append({"id": id, "name": d['name']})
-            #else:
-                #print(str(ind)+d["name"].center(50,"."))
+                    not_exist_names.remove(d['name'])
+                except ValueError:
+                    print("ValueError")
+    return not_exist_names
+
+def create(data):
+    id = len(json_data)
+    for nen in data:
+        #print(nen)
+        id = id + 1
+        not_existing_names_data = {"id": id, "name": nen}
+        print(not_existing_names_data)
+        json_data.append(not_existing_names_data)
                 
     
 
-isNameExist(json_data,names)
+name_not_found = isNameExist(json_data,names)
+create(name_not_found)
 
-print(json_data)
+
+
+
