@@ -33,13 +33,15 @@ def create(data):
         #print(nen)
         id = id + 1
         not_existing_names_data = {"id": id, "name": nen}
-        print(not_existing_names_data)
+        #print(not_existing_names_data)
         json_data.append(not_existing_names_data)
+    return json_data
                 
     
 
 name_not_found = isNameExist(json_data,names)
-create(name_not_found)
+data = create(name_not_found)
+write_json(data)
 
 
 
